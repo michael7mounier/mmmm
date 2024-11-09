@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>من يشبهني</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+        header img {
+            width: 150px;
+            height: auto;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .game-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 80%;
+            max-width: 500px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .upload-section {
+            margin-top: 20px;
+        }
+        .upload-section input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .profile-info {
+            margin-top: 20px;
+        }
+        .profile-info input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            width: calc(50% - 20px);
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .social-section {
+            margin-top: 30px;
+        }
+        .social-section a {
+            display: inline-block;
+            background-color: #3b5998;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 5px;
+        }
+        .social-section a:hover {
+            background-color: #2d4373;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://i.imgur.com/vPCjD6C.jpeg" alt="من يشبهني - Logo">
+    </header>
+
+    <div class="container">
+        <h1>مرحباً بك في لعبة "من يشبهني"</h1>
+        <div class="game-box">
+            <button class="btn" onclick="startGame()">ابدأ اللعبة</button>
+            <div class="upload-section">
+                <h3>قم بتحميل صورتك</h3>
+                <input type="file" id="uploadImage" accept="image/*">
+            </div>
+
+            <div class="profile-info" id="profileInfo" style="display: none;">
+                <h3>معلوماتك</h3>
+                <input type="text" id="name" placeholder="أدخل اسمك" required>
+                <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                <button class="btn" onclick="submitProfile()">إرسال البيانات</button>
+            </div>
+
+            <div class="social-section" id="socialLinks" style="display: none;">
+                <h3>تواصل مع من يشبهك!</h3>
+                <a href="#" id="facebookLink" target="_blank">تواصل عبر فيسبوك</a>
+                <a href="#" id="twitterLink" target="_blank">تواصل عبر تويتر</a>
+                <a href="#" id="instagramLink" target="_blank">تواصل عبر إنستغرام</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startGame() {
+            document.querySelector('.game-box').innerHTML = `
+                <h3>الرجاء تحميل صورتك لاكتشاف من يشبهك</h3>
+                <input type="file" id="uploadImage" accept="image/*" onchange="processImage()">
+            `;
+        }
+
+        function processImage() {
+            const fileInput = document.getElementById('uploadImage');
+            if (fileInput.files.length === 0) {
+                alert('يرجى تحميل صورة');
+                return;
+            }
+
+            // عند تحميل الصورة، عرض شاشة إدخال البيانات
+            document.getElementById('profileInfo').style.display = 'block';
+            document.getElementById('socialLinks').style.display = 'none';
+
+            // يمكن إضافة منطق تحليل الصورة هنا باستخدام API
+            alert('تم تحميل الصورة بنجاح. الآن أدخل معلوماتك!');
+        }
+
+        function submitProfile() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            if (!name || !email) {
+                alert('يرجى ملء جميع الحقول!');
+                return;
+            }
+
+            // هنا يمكن إرسال البيانات إلى الخادم
+            alert(`تم إرسال البيانات! شكراً لك، ${name}`);
+            document.getElementById('socialLinks').style.display = 'block';
+            document.getElementById('profileInfo').style.display = 'none';
+
+            // روابط تواصل مع من يشبهه (يمكن تعديلها حسب النتائج)
+            document.getElementById('facebookLink').href = `https://www.facebook.com/${name}`;
+            document.getElementById('twitterLink').href = `https://twitter.com/${name}`;
+            document.getElementById('instagramLink').href = `https://www.instagram.com/${name}`;
+        }
+    </script>
+</body>
+</html>
